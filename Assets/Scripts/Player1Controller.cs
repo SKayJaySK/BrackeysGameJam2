@@ -50,12 +50,16 @@ public class Player1Controller : MonoBehaviour
             rightWall = true;
         else rightWall = false;
 
-        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2))
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 3, player2) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 3, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 3, player2))
         {
             playerTop = true;
-            isGrounded = false;
         }
         else playerTop = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player2) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player2))
+        {
+            isGrounded = true;
+        }
     }
 
     void Move()
@@ -89,30 +93,31 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player2")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
             jumpCounter = 0;
         }
+
+        if (collision.gameObject.tag == "Player2")
+            jumpCounter = 0;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player2")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
             jumpCounter = 0;
         }
+
+        if (collision.gameObject.tag == "Player2")
+            jumpCounter = 0;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        //if (collision.gameObject.tag == "Ground")
             isGrounded = false;
-
-        if (collision.gameObject.tag == "Player2")
-        {
-            isGrounded = false;
-        }
     }
 }

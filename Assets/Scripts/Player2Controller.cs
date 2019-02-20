@@ -77,12 +77,16 @@ public class Player2Controller : MonoBehaviour
             rightWall = true;
         else rightWall = false;
 
-        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1))
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 2, player1) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 2, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 2, player1))
         {
             playerTop = true;
-            isGrounded = false;
         }
         else playerTop = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player1) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.down, 0.1f, player1))
+        {
+            isGrounded = true;
+        }
     }
 
     void Move()
@@ -178,13 +182,14 @@ public class Player2Controller : MonoBehaviour
             switch (moveDir)
             {
                 case -2:
-                    if (dashDown && Time.time - downDashTime > 1)
+                    if (dashDown/* && Time.time - downDashTime > 1*/)
                     {
-                        if (downDashCount < numberOfDownDashOnPlayer1)
-                            jumpForce += jumpForce * 0.3f;
                         dashDown = false;
-                        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                        rb.velocity = new Vector2(rb.velocity.x, 0);
+                        rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
                         downDashCount++;
+                        if (downDashCount < numberOfDownDashOnPlayer1)
+                            jumpForce += jumpForce * 0.5f;
                     }
                     break;
                 case -1:
@@ -211,12 +216,10 @@ public class Player2Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            isGrounded = true;
-
             if (moveDir == -1 || moveDir == 1 || moveDir == -2)
                 overriding = true;
 
-            if (moveDir == -2 && downDashCount > numberOfDownDashOnPlayer1 - 1)
+            if (moveDir == 0/* && downDashCount > numberOfDownDashOnPlayer1 - 1*/)
             {
                 jumpForce = originalJumpForce;
                 downDashCount = 0;
@@ -238,8 +241,6 @@ public class Player2Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            isGrounded = true;
-
             if (moveDir == -1 || moveDir == 1 || moveDir == -2)
                 overriding = true;
         }
@@ -247,13 +248,8 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        //if (collision.gameObject.tag == "Ground")
             isGrounded = false;
-
-        if (collision.gameObject.tag == "Player")
-        {
-            isGrounded = false;
-        }
     }
 
     IEnumerator Delay()
