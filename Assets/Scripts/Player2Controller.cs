@@ -21,6 +21,7 @@ public class Player2Controller : MonoBehaviour
 
     [Space]
     public int numberOfDownDashOnPlayer1;
+    public int jumpCount = 2;
 
     [Space]
     public Image DashHealth;
@@ -28,23 +29,24 @@ public class Player2Controller : MonoBehaviour
     [Space]
     public LayerMask player1;
     
-    int moveDir, inputLCounter, inputRCounter, downDashCount, turn;
+    int moveDir, inputCounterL, inputCounterR, downDashCount, turn;
     float timer, originalJumpForce, lastDash, downDashTime;
-    bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, topPlayer;
+    bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, topPlayer, dashingBack;
 
     GameObject otherPlayer;
-    Rigidbody2D rb;
+    Rigidbody2D rb, rb2;
 
     private void Start()
     {
         otherPlayer = FindObjectOfType<Player1Controller>().gameObject;
         rb = GetComponent<Rigidbody2D>();
+        rb2 = otherPlayer.GetComponent<Rigidbody2D>();
         isGrounded = overriding = false;
         startCouroutine = true;
         moveDir = 0; // moveDir : 1 Right Dash -1 Left Dash -3 Left 3 Right 2 Up -2 Down 0 Stationary
-        inputLCounter = inputRCounter = 0;
+        inputCounterL = inputCounterR = 0;
         originalJumpForce = jumpForce;
-        dashDown = false;
+        dashDown = dashingBack = false;
         downDashCount = 0;
         downDashTime = Time.time;
     }
@@ -78,75 +80,76 @@ public class Player2Controller : MonoBehaviour
 
     void Move()
     {
-        /*if (!Input.GetKey(up) && !Input.GetKey(down) && !Input.GetKey(left) && !Input.GetKey(right) && isGrounded && !overriding && !sidePlayer)
+        if (dashingBack)
+            StartCoroutine("DashingFalse");
+
+        if (!Input.GetKey(up) && !Input.GetKey(down) && !Input.GetKey(left) && !Input.GetKey(right) && moveDir != -2)
         {
-            if (moveDir != 2)
-            {
-                rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
-                moveDir = 0;
-                rb.velocity = new Vector2(0, -jumpForce * Time.deltaTime);
-            }
-        }*/
+            moveDir = 0;
+            if (sidePlayer)
+                rb.velocity = Vector2.zero;
+        }
 
         if (downDashCount == 0)
             jumpForce = originalJumpForce;
 
-        if (Input.GetKeyDown(up) && isGrounded && !sidePlayer)
+        if (Input.GetKeyDown(up) && !sidePlayer && isGrounded)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(new Vector2(0, jumpForce * Time.deltaTime), ForceMode2D.Impulse);
             moveDir = 2;
         }
 
-        if (Input.GetKey(left))
+        if (Input.GetKey(left) && !dashingBack)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, rb.velocity.y);
-            if (inputLCounter == 0)
+
+            if (inputCounterL == 0)
             {
-                inputLCounter = 1;
+                inputCounterL = 1;
+                inputCounterR = 0;
                 timer = Time.time;
             }
-            moveDir = -3;
+
+            if (moveDir != -2 && moveDir != -1 && moveDir != 1)
+                moveDir = -3;
         }
 
-        if (Input.GetKey(right))
+        if (Input.GetKey(right) && !dashingBack)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
-            if (inputRCounter == 0)
+            if (inputCounterR == 0)
             {
-                inputRCounter = 1;
+                inputCounterR = 1;
+                inputCounterL = 0;
                 timer = Time.time;
             }
-            moveDir = 3;
+            if (moveDir != -2 && moveDir != -1 && moveDir != 1)
+                moveDir = 3;
         }
 
-        if (Input.GetKeyUp(left) || Input.GetKeyUp(right))
+        if (Input.GetKeyUp(left) || Input.GetKeyUp(right) && (moveDir != -1 && moveDir != 1))
         {
             moveDir = 0;
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputLCounter == 1 && !overriding)
+        if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding && !sidePlayer)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            rb.velocity = new Vector2(-moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y);
+            rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = -1;
             lastDash = Time.time;
         }
 
-        if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputRCounter == 1 && !overriding)
+        if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding && !sidePlayer)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-            rb.velocity = new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y);
+            rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = 1;
             lastDash = Time.time;
         }
 
         if (Input.GetKey(down) && !overriding)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.velocity = new Vector2(rb.velocity.x, -jumpForce * 2 * Time.deltaTime);
             if (!isGrounded)
             {
@@ -157,9 +160,7 @@ public class Player2Controller : MonoBehaviour
 
         if ((Time.time - timer >= mostTimeForDash || moveDir == 1 || moveDir == -1) && !overriding)
         {
-            //rb.velocity = new Vector2(0, rb.velocity.y);
-            inputLCounter = 0;
-            inputRCounter = 0;
+            inputCounterL = inputCounterR = 0;
         }
 
         if (moveDir == 0 || moveDir == 3 || moveDir == -3)
@@ -173,21 +174,21 @@ public class Player2Controller : MonoBehaviour
                     if (dashDown && downDashCount < numberOfDownDashOnPlayer1 && Time.time - downDashTime > 1)
                     {
                         dashDown = false;
-                        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
-                        //rb.AddForce(new Vector2(rb.velocity.x, jumpForce * Time.deltaTime), ForceMode2D.Impulse);
                         downDashCount++;
-                        if (jumpForce < 1200)
-                            jumpForce += jumpForce * 0.1f;
+                        if (jumpForce < 1500)
+                            jumpForce += jumpForce * 0.3f;
                     }
                     break;
                 case -1:
-                    //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    rb.velocity = new Vector2(moveSpeed * 2.5f * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(moveSpeed * 30f * Time.deltaTime, rb.velocity.y);
+                    dashingBack = true;
+                    rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
                 case 1:
-                    //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-                    rb.velocity = new Vector2(-moveSpeed * 2.5f * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(moveSpeed * -30f * Time.deltaTime, rb.velocity.y);
+                    dashingBack = true;
+                    rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
             }
 
@@ -206,20 +207,23 @@ public class Player2Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            overriding = true;
+            if (moveDir == -1 || moveDir == 1 || moveDir == -2)
+                overriding = true;
+
             if (moveDir == -2 && downDashCount > numberOfDownDashOnPlayer1 - 1)
             {
                 jumpForce = originalJumpForce;
                 downDashCount = 0;
                 downDashTime = Time.time;
             }
-
+            
             if (!sidePlayer)
                 topPlayer = true;
         }
-        else if (moveDir != -2 && collision.gameObject.tag != "Player")
+        else/* if (moveDir != -2 && collision.gameObject.tag != "Player")*/
         {
             jumpForce = originalJumpForce;
+            downDashCount = 0;
             dashDown = false;
         }
     }
@@ -230,7 +234,9 @@ public class Player2Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Player")
         {
-            overriding = true;
+            if (moveDir == -1 || moveDir == 1 || moveDir == -2)
+                overriding = true;
+
             if (!sidePlayer)
                 topPlayer = true;
         }
@@ -253,5 +259,12 @@ public class Player2Controller : MonoBehaviour
         overriding = false;
         startCouroutine = true;
         moveDir = 0;
+        rb2.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    IEnumerator DashingFalse()
+    {
+        yield return new WaitForSeconds(0.2f);
+        dashingBack = false;
     }
 }
