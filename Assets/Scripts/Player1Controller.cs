@@ -62,7 +62,7 @@ public class Player1Controller : MonoBehaviour
         {
             jumpCounter++;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0, jumpForce * Time.deltaTime), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
 
         if (Input.GetKey(left))
@@ -86,8 +86,11 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = true;
-        jumpCounter = 0;
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player2")
+        {
+            isGrounded = true;
+            jumpCounter = 0;
+        }
 
         if (collision.gameObject.tag == "Player2" && !sidePlayer)
             topPlayer = true;
@@ -95,8 +98,11 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        isGrounded = true;
-        jumpCounter = 0;
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Player2")
+        {
+            isGrounded = true;
+            jumpCounter = 0;
+        }
 
         if (collision.gameObject.tag == "Player2" && !sidePlayer)
             topPlayer = true;
@@ -104,9 +110,13 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isGrounded = false;
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = false;
 
         if (collision.gameObject.tag == "Player2")
+        {
             topPlayer = false;
+            isGrounded = false;
+        }
     }
 }

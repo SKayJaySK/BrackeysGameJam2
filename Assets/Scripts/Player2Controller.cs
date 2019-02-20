@@ -96,7 +96,7 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyDown(up) && !sidePlayer && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(new Vector2(0, jumpForce * Time.deltaTime), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             moveDir = 2;
         }
 
@@ -150,7 +150,7 @@ public class Player2Controller : MonoBehaviour
 
         if (Input.GetKey(down) && !overriding)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -jumpForce * 2 * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, -jumpForce * 2);
             if (!isGrounded)
             {
                 moveDir = -2;
@@ -174,19 +174,19 @@ public class Player2Controller : MonoBehaviour
                     if (dashDown && downDashCount < numberOfDownDashOnPlayer1 && Time.time - downDashTime > 1)
                     {
                         dashDown = false;
-                        rb.velocity = new Vector2(rb.velocity.x, jumpForce * Time.deltaTime);
+                        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                         downDashCount++;
                         if (jumpForce < 1500)
                             jumpForce += jumpForce * 0.3f;
                     }
                     break;
                 case -1:
-                    rb.velocity = new Vector2(moveSpeed * 30f * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(moveSpeed / 2, rb.velocity.y);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
                 case 1:
-                    rb.velocity = new Vector2(moveSpeed * -30f * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(-moveSpeed / 2, rb.velocity.y);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
@@ -203,10 +203,13 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = true;
 
         if (collision.gameObject.tag == "Player")
         {
+            isGrounded = true;
+
             if (moveDir == -1 || moveDir == 1 || moveDir == -2)
                 overriding = true;
 
@@ -230,10 +233,13 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        isGrounded = true;
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = true;
 
         if (collision.gameObject.tag == "Player")
         {
+            isGrounded = true;
+
             if (moveDir == -1 || moveDir == 1 || moveDir == -2)
                 overriding = true;
 
@@ -244,10 +250,12 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isGrounded = false;
+        if (collision.gameObject.tag == "Ground")
+            isGrounded = false;
 
         if (collision.gameObject.tag == "Player")
         {
+            isGrounded = false;
             topPlayer = false;
         }
     }
