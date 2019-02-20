@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 156944786}
   - component: {fileID: 156944787}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground4.1
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &156944787
 BoxCollider2D:
@@ -278,8 +278,8 @@ GameObject:
   m_Component:
   - component: {fileID: 213060167}
   - component: {fileID: 213060168}
-  m_Layer: 0
-  m_Name: Ground4.3
+  m_Layer: 10
+  m_Name: Ground4.1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,8 +335,8 @@ GameObject:
   m_Component:
   - component: {fileID: 428946625}
   - component: {fileID: 428946626}
-  m_Layer: 0
-  m_Name: Ground4.0
+  m_Layer: 10
+  m_Name: Ground4.1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &428946626
 BoxCollider2D:
@@ -432,7 +432,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 451362778}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 4a4452adc8fac9348b80ba71af28fa08, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -505,7 +505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451362778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.33, y: -2.34, z: 0}
+  m_LocalPosition: {x: 5.33, y: -3.034961, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -532,6 +532,9 @@ MonoBehaviour:
   player2:
     serializedVersion: 2
     m_Bits: 512
+  wall:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &454454016
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838774145}
   - component: {fileID: 838774146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: LeftWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -901,7 +904,7 @@ GameObject:
   - component: {fileID: 1005529507}
   - component: {fileID: 1005529508}
   m_Layer: 0
-  m_Name: Ground3.1
+  m_Name: Ground3.0
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -919,7 +922,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1005529508
 BoxCollider2D:
@@ -1015,7 +1018,7 @@ GameObject:
   - component: {fileID: 1039285994}
   - component: {fileID: 1039285995}
   m_Layer: 0
-  m_Name: Ground4.2
+  m_Name: Ground4.0
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1033,7 +1036,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1039285995
 BoxCollider2D:
@@ -1244,7 +1247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1238466342}
   - component: {fileID: 1238466343}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground2.1 (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1263,7 +1266,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1238466343
 BoxCollider2D:
@@ -1415,7 +1418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422228007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4, y: -2.845039, z: 0}
+  m_LocalPosition: {x: 7.81, y: -3.54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1450,6 +1453,9 @@ MonoBehaviour:
   player1:
     serializedVersion: 2
     m_Bits: 256
+  wall:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!114 &1422228014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1561,8 +1567,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1585306232}
   - component: {fileID: 1585306233}
-  m_Layer: 0
-  m_Name: Ground3.0
+  m_Layer: 10
+  m_Name: Ground3.1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1580,7 +1586,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1585306233
 BoxCollider2D:
@@ -1697,7 +1703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668436054}
   - component: {fileID: 1668436055}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground3.1 (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1754,8 +1760,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1684962189}
   - component: {fileID: 1684962190}
-  m_Layer: 0
-  m_Name: Ground2.0
+  m_Layer: 10
+  m_Name: Ground2.1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1773,7 +1779,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1684962190
 BoxCollider2D:
@@ -1870,17 +1876,17 @@ Transform:
   - {fileID: 635380657}
   - {fileID: 933391076}
   - {fileID: 213060167}
-  - {fileID: 1039285994}
   - {fileID: 156944786}
   - {fileID: 428946625}
+  - {fileID: 1039285994}
   - {fileID: 2030643611}
   - {fileID: 1668436054}
-  - {fileID: 1005529507}
   - {fileID: 1585306232}
-  - {fileID: 1927053204}
+  - {fileID: 1005529507}
   - {fileID: 1863750621}
   - {fileID: 1238466342}
   - {fileID: 1684962189}
+  - {fileID: 1927053204}
   - {fileID: 1012451558}
   - {fileID: 838774145}
   - {fileID: 1924618249}
@@ -2011,7 +2017,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1863750621}
   - component: {fileID: 1863750622}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground2.1 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2030,7 +2036,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1863750622
 BoxCollider2D:
@@ -2068,7 +2074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924618249}
   - component: {fileID: 1924618250}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RightWall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2126,7 +2132,7 @@ GameObject:
   - component: {fileID: 1927053204}
   - component: {fileID: 1927053205}
   m_Layer: 0
-  m_Name: Ground2.1
+  m_Name: Ground2.0
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2144,7 +2150,7 @@ Transform:
   m_LocalScale: {x: 8.167911, y: 7.1804004, z: 1}
   m_Children: []
   m_Father: {fileID: 1696600598}
-  m_RootOrder: 11
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1927053205
 BoxCollider2D:
@@ -2182,7 +2188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030643611}
   - component: {fileID: 2030643612}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ground3.1 (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}

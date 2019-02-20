@@ -27,11 +27,11 @@ public class Player2Controller : MonoBehaviour
     public Image DashHealth;
 
     [Space]
-    public LayerMask player1;
+    public LayerMask player1, wall;
     
-    int moveDir, inputCounterL, inputCounterR, downDashCount, turn;
+    int moveDir, inputCounterL, inputCounterR, downDashCount;
     float timer, originalJumpForce, lastDash, downDashTime;
-    bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, topPlayer, dashingBack;
+    bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, dashingBack, leftWall, rightWall, playerTop;
 
     GameObject otherPlayer;
     Rigidbody2D rb, rb2;
@@ -46,24 +46,16 @@ public class Player2Controller : MonoBehaviour
         moveDir = 0; // moveDir : 1 Right Dash -1 Left Dash -3 Left 3 Right 2 Up -2 Down 0 Stationary
         inputCounterL = inputCounterR = 0;
         originalJumpForce = jumpForce;
-        dashDown = dashingBack = false;
+        dashDown = dashingBack = leftWall = rightWall = playerTop = false;
         downDashCount = 0;
         downDashTime = Time.time;
     }
 
     private void Update()
     {
-        TurnUpdate();
         RayCasting();
         Move();
         UpdateDash();
-    }
-
-    void TurnUpdate()
-    {
-        if (transform.position.y > otherPlayer.transform.position.y)
-            turn = 2;
-        else turn = 1;
     }
 
     void UpdateDash()
@@ -76,6 +68,21 @@ public class Player2Controller : MonoBehaviour
         if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.1f, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector3.right, 0.1f, player1))
             sidePlayer = true;
         else sidePlayer = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.1f, wall))
+            leftWall = true;
+        else leftWall = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.right, 0.1f, wall))
+            rightWall = true;
+        else rightWall = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player1))
+        {
+            playerTop = true;
+            isGrounded = false;
+        }
+        else playerTop = false;
     }
 
     void Move()
@@ -93,14 +100,14 @@ public class Player2Controller : MonoBehaviour
         if (downDashCount == 0)
             jumpForce = originalJumpForce;
 
-        if (Input.GetKeyDown(up) && !sidePlayer && isGrounded)
+        if (Input.GetKeyDown(up) && !sidePlayer && isGrounded && !playerTop)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             moveDir = 2;
         }
 
-        if (Input.GetKey(left) && !dashingBack)
+        if (Input.GetKey(left) && !dashingBack && !leftWall)
         {
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, rb.velocity.y);
 
@@ -115,7 +122,7 @@ public class Player2Controller : MonoBehaviour
                 moveDir = -3;
         }
 
-        if (Input.GetKey(right) && !dashingBack)
+        if (Input.GetKey(right) && !dashingBack && !rightWall)
         {
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
             if (inputCounterR == 0)
@@ -171,13 +178,13 @@ public class Player2Controller : MonoBehaviour
             switch (moveDir)
             {
                 case -2:
-                    if (dashDown && downDashCount < numberOfDownDashOnPlayer1 && Time.time - downDashTime > 1)
+                    if (dashDown && Time.time - downDashTime > 1)
                     {
+                        if (downDashCount < numberOfDownDashOnPlayer1)
+                            jumpForce += jumpForce * 0.3f;
                         dashDown = false;
                         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                         downDashCount++;
-                        if (jumpForce < 1500)
-                            jumpForce += jumpForce * 0.3f;
                     }
                     break;
                 case -1:
@@ -195,10 +202,6 @@ public class Player2Controller : MonoBehaviour
             if (startCouroutine)
                 StartCoroutine("Delay");
         }
-
-        if (topPlayer && !sidePlayer && turn != 2)
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        else rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -219,9 +222,6 @@ public class Player2Controller : MonoBehaviour
                 downDashCount = 0;
                 downDashTime = Time.time;
             }
-            
-            if (!sidePlayer)
-                topPlayer = true;
         }
         else/* if (moveDir != -2 && collision.gameObject.tag != "Player")*/
         {
@@ -242,9 +242,6 @@ public class Player2Controller : MonoBehaviour
 
             if (moveDir == -1 || moveDir == 1 || moveDir == -2)
                 overriding = true;
-
-            if (!sidePlayer)
-                topPlayer = true;
         }
     }
 
@@ -256,7 +253,6 @@ public class Player2Controller : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             isGrounded = false;
-            topPlayer = false;
         }
     }
 

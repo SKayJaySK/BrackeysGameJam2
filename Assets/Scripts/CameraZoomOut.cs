@@ -15,7 +15,7 @@ public class CameraZoomOut : MonoBehaviour
     {
         if (Mathf.Abs(player1.transform.position.x - player2.transform.position.x) > limit && Camera.main.orthographicSize != Mathf.Abs(player1.transform.position.x - player2.transform.position.x))
         {
-            if (lastDiff > Mathf.Abs(player1.transform.position.x - player2.transform.position.x) && Camera.main.orthographicSize > 5)
+            if (lastDiff > Mathf.Abs(player1.transform.position.x - player2.transform.position.x) && Camera.main.orthographicSize > 5 && Camera.main.orthographicSize * Camera.main.aspect > Mathf.Abs(player1.transform.position.y - player2.transform.position.y))
             {
                 Camera.main.orthographicSize -= cameraZoomSpeed * Time.deltaTime;
                 transform.position -= new Vector3(0, cameraZoomSpeed * Time.deltaTime, 0);

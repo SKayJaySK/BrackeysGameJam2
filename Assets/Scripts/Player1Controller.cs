@@ -12,10 +12,10 @@ public class Player1Controller : MonoBehaviour
     public float jumpForce = 300f;
     public float moveSpeed = 100f;
 
-    public LayerMask player2;
+    public LayerMask player2, wall;
 
-    int turn, jumpCounter;
-    bool isGrounded, sidePlayer, topPlayer;
+    int jumpCounter;
+    bool isGrounded, sidePlayer, leftWall, rightWall, playerTop;
 
     GameObject otherPlayer;
     Rigidbody2D rb;
@@ -24,31 +24,38 @@ public class Player1Controller : MonoBehaviour
     {
         otherPlayer = FindObjectOfType<Player2Controller>().gameObject;
         rb = GetComponent<Rigidbody2D>();
-        isGrounded = sidePlayer = topPlayer = false;
+        isGrounded = sidePlayer = leftWall = rightWall = playerTop = false;
         jumpCounter = 0;
     }
 
     private void Update()
     {
-        TurnUpdate();
         RayCasting();
         Move();
     }
 
-    void TurnUpdate()
-    {
-        if (transform.position.y > otherPlayer.transform.position.y)
-            turn = 1;
-        else turn = 2;
-    }
-
     void RayCasting()
     {
-        if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.1f, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector3.right, 0.1f, player2))
+        if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.3f, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector3.right, 0.3f, player2))
         {
             sidePlayer = true;
         }
         else sidePlayer = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.3f, wall))
+            leftWall = true;
+        else leftWall = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.right, 0.3f, wall))
+            rightWall = true;
+        else rightWall = false;
+
+        if (Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2) || Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y + transform.localScale.y / 2 - 0.05f), Vector2.up, 1, player2))
+        {
+            playerTop = true;
+            isGrounded = false;
+        }
+        else playerTop = false;
     }
 
     void Move()
@@ -58,18 +65,18 @@ public class Player1Controller : MonoBehaviour
             rb.velocity = Vector2.zero;
         }
 
-        if (Input.GetKeyDown(up) && jumpCounter < 1 && !sidePlayer)
+        if (Input.GetKeyDown(up) && jumpCounter < 1 && !sidePlayer && !playerTop)
         {
             jumpCounter++;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
 
-        if (Input.GetKey(left))
+        if (Input.GetKey(left) && !leftWall)
         {
             rb.velocity = new Vector2(-moveSpeed * Time.deltaTime, rb.velocity.y);
         }
-        if (Input.GetKey(right))
+        if (Input.GetKey(right) && !rightWall)
         {
             rb.velocity = new Vector2(moveSpeed * Time.deltaTime, rb.velocity.y);
         }
@@ -78,10 +85,6 @@ public class Player1Controller : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
-
-        if (topPlayer && turn != 1)
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        else rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -91,9 +94,6 @@ public class Player1Controller : MonoBehaviour
             isGrounded = true;
             jumpCounter = 0;
         }
-
-        if (collision.gameObject.tag == "Player2" && !sidePlayer)
-            topPlayer = true;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -103,9 +103,6 @@ public class Player1Controller : MonoBehaviour
             isGrounded = true;
             jumpCounter = 0;
         }
-
-        if (collision.gameObject.tag == "Player2" && !sidePlayer)
-            topPlayer = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -115,7 +112,6 @@ public class Player1Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Player2")
         {
-            topPlayer = false;
             isGrounded = false;
         }
     }
