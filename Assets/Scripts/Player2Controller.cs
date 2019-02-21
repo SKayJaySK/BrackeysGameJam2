@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player2Controller : MonoBehaviour
 {
@@ -22,9 +21,6 @@ public class Player2Controller : MonoBehaviour
     [Space]
     public int numberOfDownDashOnPlayer1;
     public int jumpCount = 2;
-
-    [Space]
-    public Image DashHealth;
 
     [Space]
     public LayerMask player1, wall;
@@ -55,13 +51,12 @@ public class Player2Controller : MonoBehaviour
     {
         RayCasting();
         Move();
-        UpdateDash();
     }
 
-    void UpdateDash()
-    {
-        DashHealth.fillAmount = Mathf.Clamp(1 - (((lastDash + dashDelay) - Time.time) / dashDelay), 0, 1);
-    }
+    //void UpdateDash()
+    //{
+    //    DashHealth.fillAmount = Mathf.Clamp(1 - (((lastDash + dashDelay) - Time.time) / dashDelay), 0, 1);
+    //}
 
     void RayCasting()
     {

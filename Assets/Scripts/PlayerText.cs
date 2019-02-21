@@ -9,22 +9,21 @@ public class PlayerText : MonoBehaviour
 
     public float horizontalOffset = 1.8f;
     public float verticalOffset = 1.8f;
+    public float TextStayingTime = 4f;
 
     public List<string> dialogues;
     int textIterator;
 
     float showTime;
     bool showingText;
-
-    //Image img;
+    
     Text txt;
 
     Color modifier;
 
     private void Start()
     {
-        //img = bubble.GetChild(0).GetComponent<Image>();
-        txt = bubble.GetChild(1).GetComponent<Text>();
+        txt = bubble.GetChild(0).GetComponent<Text>();
         bubble.gameObject.SetActive(false);
         textIterator = 0;
         showingText = false;
@@ -41,20 +40,18 @@ public class PlayerText : MonoBehaviour
         if (showingText && txt.color.a < 1)
         {
             modifier = new Color(1, 1, 1, modifier.a + 0.075f);
-            //img.color = modifier;
             txt.color = modifier;
         }
 
-        if (!showingText && txt.color.a >= 1)
+        if (!showingText && txt.color.a > 0)
         {
             modifier = new Color(1, 1, 1, modifier.a - 0.1f);
-            //img.color = modifier;
             txt.color = modifier;
         }
 
-        if (Time.time - showTime >= 5)
+        if (Time.time - showTime >= TextStayingTime)
             showingText = false;
-        if (Time.time - showTime >= 6)
+        if (Time.time - showTime >= TextStayingTime + 1)
             HideText();
 
     }
@@ -68,6 +65,20 @@ public class PlayerText : MonoBehaviour
         showingText = true;
 
         showTime = Time.time;
+    }
+
+    public void ShowTextExact(int iterator)
+    {
+        if (iterator <= dialogues.Count)
+        {
+            string text = dialogues[iterator - 1];
+            text = text.Replace("\\n", "\n");
+            txt.text = text;
+            bubble.gameObject.SetActive(true);
+            showingText = true;
+
+            showTime = Time.time;
+        }
     }
 
     public void HideText()
