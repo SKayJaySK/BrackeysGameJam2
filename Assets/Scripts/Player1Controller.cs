@@ -19,11 +19,13 @@ public class Player1Controller : MonoBehaviour
 
     GameObject otherPlayer;
     Rigidbody2D rb;
+    Animator anim;
 
     private void Start()
     {
         otherPlayer = FindObjectOfType<Player2Controller>().gameObject;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         isGrounded = sidePlayer = leftWall = rightWall = playerTop = false;
         jumpCounter = 0;
     }
@@ -64,6 +66,7 @@ public class Player1Controller : MonoBehaviour
 
     void Move()
     {
+
         if (!Input.GetKey(up) && !Input.GetKey(down) && !Input.GetKey(left) && !Input.GetKey(right) && sidePlayer)
         {
             rb.velocity = Vector2.zero;
@@ -71,6 +74,8 @@ public class Player1Controller : MonoBehaviour
 
         if (Input.GetKeyDown(up) && jumpCounter < 1 && !sidePlayer && !playerTop)
         {
+            anim.SetBool("isJumping", true);
+            anim.Play("JumpPlayer1", 0, 0);
             jumpCounter++;
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -89,6 +94,8 @@ public class Player1Controller : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        anim.SetFloat("velocity", rb.velocity.x);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -96,6 +103,7 @@ public class Player1Controller : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            anim.SetBool("isJumping", false);
             jumpCounter = 0;
         }
 
@@ -117,7 +125,6 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //if (collision.gameObject.tag == "Ground")
-            isGrounded = false;
+        isGrounded = false;
     }
 }

@@ -31,12 +31,14 @@ public class Player2Controller : MonoBehaviour
 
     GameObject otherPlayer;
     Rigidbody2D rb, rb2;
+    Animator anim;
 
     private void Start()
     {
         otherPlayer = FindObjectOfType<Player1Controller>().gameObject;
         rb = GetComponent<Rigidbody2D>();
         rb2 = otherPlayer.GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         isGrounded = overriding = false;
         startCouroutine = true;
         moveDir = 0; // moveDir : 1 Right Dash -1 Left Dash -3 Left 3 Right 2 Up -2 Down 0 Stationary
@@ -101,6 +103,8 @@ public class Player2Controller : MonoBehaviour
 
         if (Input.GetKeyDown(up) && !sidePlayer && isGrounded && !playerTop)
         {
+            anim.SetBool("isJumping", true);
+            anim.Play("JumpPlayer2", 0, 0);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             moveDir = 2;
@@ -179,6 +183,8 @@ public class Player2Controller : MonoBehaviour
                 case -2:
                     if (dashDown/* && Time.time - downDashTime > 1*/)
                     {
+                        anim.SetBool("isJumping", true);
+                        anim.Play("JumpPlayer2", 0, 0);
                         dashDown = false;
                         rb.velocity = new Vector2(rb.velocity.x, 0);
                         rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
@@ -202,12 +208,17 @@ public class Player2Controller : MonoBehaviour
             if (startCouroutine)
                 StartCoroutine("Delay");
         }
+
+        anim.SetFloat("velocity", rb.velocity.x);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Ground")
+        {
             isGrounded = true;
+            anim.SetBool("isJumping", false);
+        }
 
         if (collision.gameObject.tag == "Player")
         {
@@ -243,8 +254,7 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //if (collision.gameObject.tag == "Ground")
-            isGrounded = false;
+        isGrounded = false;
     }
 
     IEnumerator Delay()
