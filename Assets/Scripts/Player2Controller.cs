@@ -194,12 +194,14 @@ public class Player2Controller : MonoBehaviour
                     }
                     break;
                 case -1:
-                    rb.velocity = new Vector2(moveSpeed / 2, rb.velocity.y);
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    rb.AddForce(new Vector2(moveSpeed / 5, rb.velocity.y), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
                 case 1:
-                    rb.velocity = new Vector2(-moveSpeed / 2, rb.velocity.y);
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    rb.AddForce(new Vector2(-moveSpeed / 5, rb.velocity.y), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
@@ -218,6 +220,21 @@ public class Player2Controller : MonoBehaviour
         {
             isGrounded = true;
             anim.SetBool("isJumping", false);
+
+            if (moveDir == -2)
+                moveDir = 0;
+        }
+
+        if (collision.gameObject.tag == "Break")
+        {
+            isGrounded = true;
+            anim.SetBool("isJumping", false);
+
+            if (moveDir == -2 || moveDir == 1 || moveDir == -1)
+            {
+                moveDir = 0;
+                collision.gameObject.SetActive(false);
+            }
         }
 
         if (collision.gameObject.tag == "Player")
@@ -242,7 +259,7 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Break")
             isGrounded = true;
 
         if (collision.gameObject.tag == "Player")

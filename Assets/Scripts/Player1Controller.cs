@@ -17,13 +17,11 @@ public class Player1Controller : MonoBehaviour
     int jumpCounter;
     bool isGrounded, sidePlayer, leftWall, rightWall, playerTop;
 
-    GameObject otherPlayer;
     Rigidbody2D rb;
     Animator anim;
 
     private void Start()
     {
-        otherPlayer = FindObjectOfType<Player2Controller>().gameObject;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         isGrounded = sidePlayer = leftWall = rightWall = playerTop = false;
@@ -100,7 +98,7 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Break")
         {
             isGrounded = true;
             anim.SetBool("isJumping", false);
@@ -113,7 +111,7 @@ public class Player1Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Break")
         {
             isGrounded = true;
             jumpCounter = 0;

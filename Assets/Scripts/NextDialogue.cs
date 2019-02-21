@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class NextDialogue : MonoBehaviour
 {
-    public bool ShowSpecificText;
-    public int dialogueNumber;
+    public bool ShowSpecificText, thisEnablesNext;
+    public int dialogueNumber, player;
+
+    public GameObject nextDialogue;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player2")
+        if (player == 1 && collision.tag == "Player")
         {
             if (!ShowSpecificText)
             {
@@ -21,6 +23,26 @@ public class NextDialogue : MonoBehaviour
                 collision.GetComponent<PlayerText>().ShowTextExact(dialogueNumber);
                 gameObject.SetActive(false);
             }
+
+            if (thisEnablesNext)
+                nextDialogue.SetActive(true);
+        }
+
+        if (player == 2 && collision.tag == "Player2")
+        {
+            if (!ShowSpecificText)
+            {
+                collision.GetComponent<PlayerText>().ShowText();
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                collision.GetComponent<PlayerText>().ShowTextExact(dialogueNumber);
+                gameObject.SetActive(false);
+            }
+
+            if (thisEnablesNext)
+                nextDialogue.SetActive(true);
         }
     }
 }
