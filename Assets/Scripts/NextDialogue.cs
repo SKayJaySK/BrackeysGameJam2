@@ -32,12 +32,12 @@ public class NextDialogue : MonoBehaviour
         {
             if (!ShowSpecificText)
             {
-                collision.GetComponent<PlayerText>().ShowText();
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerText>().ShowText();
                 gameObject.SetActive(false);
             }
             else
             {
-                collision.GetComponent<PlayerText>().ShowTextExact(dialogueNumber);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerText>().ShowTextExact(dialogueNumber);
                 gameObject.SetActive(false);
             }
 

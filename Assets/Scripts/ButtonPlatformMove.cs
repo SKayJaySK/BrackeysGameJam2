@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonPlatformMove : MonoBehaviour
 {
     public float moveTill;
+    float moveTill2;
     public bool moveRight;
     public GameObject moveThisObject;
 
@@ -13,6 +14,7 @@ public class ButtonPlatformMove : MonoBehaviour
     private void Start()
     {
         openIt = false;
+        moveTill2 = moveThisObject.transform.position.x;
     }
 
     private void Update()
@@ -27,6 +29,17 @@ public class ButtonPlatformMove : MonoBehaviour
             if (moveThisObject.transform.position.x > moveTill)
                 moveThisObject.transform.position -= new Vector3(Time.deltaTime, 0, 0);
         }
+
+        if (moveRight && !openIt)
+        {
+            if (moveThisObject.transform.position.x > moveTill2)
+                moveThisObject.transform.position -= new Vector3(Time.deltaTime, 0, 0);
+        }
+        else if (!moveRight && !openIt)
+        {
+            if (moveThisObject.transform.position.x < moveTill2)
+                moveThisObject.transform.position += new Vector3(Time.deltaTime, 0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,6 +47,14 @@ public class ButtonPlatformMove : MonoBehaviour
         if (collision.gameObject.tag == "Player2")
         {
             openIt = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player2")
+        {
+            openIt = false;
         }
     }
 }

@@ -27,7 +27,7 @@ public class Player2Controller : MonoBehaviour
     
     int moveDir, inputCounterL, inputCounterR, downDashCount;
     float timer, originalJumpForce, lastDash, downDashTime;
-    bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, dashingBack, leftWall, rightWall, playerTop;
+    bool isGrounded, overriding, startCouroutine, dashDown, dashingBack, leftWall, rightWall, playerTop;
 
     GameObject otherPlayer;
     GameObject Trail;
@@ -56,7 +56,6 @@ public class Player2Controller : MonoBehaviour
     {
         RayCasting();
         Move();
-        Debug.Log(moveDir);
     }
 
     //void UpdateDash()
@@ -66,10 +65,6 @@ public class Player2Controller : MonoBehaviour
 
     void RayCasting()
     {
-        if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.1f, player1) || Physics2D.Raycast(new Vector2(transform.position.x + transform.localScale.x / 2 - 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector3.right, 0.1f, player1))
-            sidePlayer = true;
-        else sidePlayer = false;
-
         if (Physics2D.Raycast(new Vector2(transform.position.x - transform.localScale.x / 2 + 0.05f, transform.position.y - transform.localScale.y / 2 + 0.05f), Vector2.left, 0.1f, wall))
             leftWall = true;
         else leftWall = false;
@@ -99,14 +94,12 @@ public class Player2Controller : MonoBehaviour
         {
             moveDir = 0;
             Trail.SetActive(false);
-            if (sidePlayer)
-                rb.velocity = Vector2.zero;
         }
 
         if (downDashCount == 0)
             jumpForce = originalJumpForce;
 
-        if (Input.GetKeyDown(up) && !sidePlayer && isGrounded && !playerTop)
+        if (Input.GetKeyDown(up) && isGrounded && !playerTop)
         {
             anim.SetBool("isJumping", true);
             anim.Play("JumpPlayer2", 0, 0);
@@ -150,7 +143,7 @@ public class Player2Controller : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
-        if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding && !sidePlayer)
+        if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding)
         {
             Trail.SetActive(true);
             rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
@@ -158,7 +151,7 @@ public class Player2Controller : MonoBehaviour
             lastDash = Time.time;
         }
 
-        if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding && !sidePlayer)
+        if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding)
         {
             Trail.SetActive(true);
             rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
