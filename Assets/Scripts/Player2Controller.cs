@@ -30,6 +30,7 @@ public class Player2Controller : MonoBehaviour
     bool isGrounded, overriding, startCouroutine, dashDown, sidePlayer, dashingBack, leftWall, rightWall, playerTop;
 
     GameObject otherPlayer;
+    GameObject Trail;
     Rigidbody2D rb, rb2;
     Animator anim;
 
@@ -39,6 +40,8 @@ public class Player2Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb2 = otherPlayer.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        Trail = transform.GetChild(0).gameObject;
+        Trail.SetActive(false);
         isGrounded = overriding = false;
         startCouroutine = true;
         moveDir = 0; // moveDir : 1 Right Dash -1 Left Dash -3 Left 3 Right 2 Up -2 Down 0 Stationary
@@ -53,6 +56,7 @@ public class Player2Controller : MonoBehaviour
     {
         RayCasting();
         Move();
+        Debug.Log(moveDir);
     }
 
     //void UpdateDash()
@@ -94,6 +98,7 @@ public class Player2Controller : MonoBehaviour
         if (!Input.GetKey(up) && !Input.GetKey(down) && !Input.GetKey(left) && !Input.GetKey(right) && moveDir != -2)
         {
             moveDir = 0;
+            Trail.SetActive(false);
             if (sidePlayer)
                 rb.velocity = Vector2.zero;
         }
@@ -141,11 +146,13 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyUp(left) || Input.GetKeyUp(right) && (moveDir != -1 && moveDir != 1))
         {
             moveDir = 0;
+            Trail.SetActive(false);
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
         if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding && !sidePlayer)
         {
+            Trail.SetActive(true);
             rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = -1;
             lastDash = Time.time;
@@ -153,6 +160,7 @@ public class Player2Controller : MonoBehaviour
 
         if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding && !sidePlayer)
         {
+            Trail.SetActive(true);
             rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = 1;
             lastDash = Time.time;
@@ -160,6 +168,7 @@ public class Player2Controller : MonoBehaviour
 
         if (Input.GetKey(down) && !overriding)
         {
+            Trail.SetActive(true);
             rb.velocity = new Vector2(rb.velocity.x, -jumpForce * 2);
             if (!isGrounded)
             {
@@ -183,6 +192,7 @@ public class Player2Controller : MonoBehaviour
                 case -2:
                     if (dashDown/* && Time.time - downDashTime > 1*/)
                     {
+                        Trail.SetActive(true);
                         anim.SetBool("isJumping", true);
                         anim.Play("JumpPlayer2", 0, 0);
                         dashDown = false;
@@ -194,14 +204,16 @@ public class Player2Controller : MonoBehaviour
                     }
                     break;
                 case -1:
+                    Trail.SetActive(true);
                     rb.velocity = new Vector2(0, rb.velocity.y);
-                    rb.AddForce(new Vector2(moveSpeed / 5, rb.velocity.y), ForceMode2D.Impulse);
+                    rb.AddForce(new Vector2(moveSpeed / 1.5f, rb.velocity.y), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
                 case 1:
+                    Trail.SetActive(true);
                     rb.velocity = new Vector2(0, rb.velocity.y);
-                    rb.AddForce(new Vector2(-moveSpeed / 5, rb.velocity.y), ForceMode2D.Impulse);
+                    rb.AddForce(new Vector2(-moveSpeed / 1.5f, rb.velocity.y), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
@@ -222,7 +234,10 @@ public class Player2Controller : MonoBehaviour
             anim.SetBool("isJumping", false);
 
             if (moveDir == -2)
+            {
                 moveDir = 0;
+                Trail.SetActive(false);
+            }
         }
 
         if (collision.gameObject.tag == "Break")
@@ -233,6 +248,7 @@ public class Player2Controller : MonoBehaviour
             if (moveDir == -2 || moveDir == 1 || moveDir == -1)
             {
                 moveDir = 0;
+                Trail.SetActive(false);
                 collision.gameObject.SetActive(false);
             }
         }
@@ -277,7 +293,9 @@ public class Player2Controller : MonoBehaviour
     IEnumerator Delay()
     {
         startCouroutine = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
+        Trail.SetActive(false);
+        yield return new WaitForSeconds(0.4f);
         overriding = false;
         startCouroutine = true;
         moveDir = 0;

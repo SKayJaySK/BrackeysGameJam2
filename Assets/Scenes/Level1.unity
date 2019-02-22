@@ -189,7 +189,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!224 &3178187
 RectTransform:
@@ -2332,25 +2332,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Text Goes Here.
-
-    Hello Next Line.
-
-    Hi, how are you guys doing ?
-
-    Well I guess this might be the last line.
-
-    Okay, We can add more !
-
-    Damn, How many more ?
-
-    .
-
-    .
-
-    This is the last line.
-
-'
+  m_Text: 
 --- !u!222 &1494021178
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2725,6 +2707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1696600598}
   - component: {fileID: 1696600599}
+  - component: {fileID: 1696600600}
   m_Layer: 0
   m_Name: Level1
   m_TagString: Untagged
@@ -2800,6 +2783,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1696600600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696600597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48783e0227efc19498462dad187ce00f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1730360424
 GameObject:
   m_ObjectHideFlags: 0
