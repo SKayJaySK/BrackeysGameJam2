@@ -6,6 +6,9 @@ public class Button : MonoBehaviour
 {
     public Sprite open, close;
     public GameObject door;
+
+    public bool up;
+
     BoxCollider2D doorCol;
 
     public bool pressureDoor;
@@ -47,7 +50,10 @@ public class Button : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player2" || collision.gameObject.tag == "Player")
         {
-            transform.position -= new Vector3(0, offset, 0);
+            if (!up)
+                transform.position -= new Vector3(0, offset, 0);
+            else
+                transform.position += new Vector3(0, offset, 0);
             inside = true;
         }
     }
@@ -56,7 +62,10 @@ public class Button : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player2" || collision.gameObject.tag == "Player")
         {
-            transform.position += new Vector3(0, offset, 0);
+            if (!up)
+                transform.position += new Vector3(0, offset, 0);
+            else
+                transform.position -= new Vector3(0, offset, 0);
             inside = false;
         }
     }

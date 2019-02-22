@@ -6,7 +6,7 @@ public class ButtonPlatformMove : MonoBehaviour
 {
     public float moveTill;
     float moveTill2;
-    public bool moveRight;
+    public bool moveRight, up;
     public GameObject moveThisObject;
 
     bool openIt;
@@ -47,6 +47,10 @@ public class ButtonPlatformMove : MonoBehaviour
         if (collision.gameObject.tag == "Player2")
         {
             openIt = true;
+            if (!up)
+                transform.position -= new Vector3(0, 0.1f, 0);
+            else
+                transform.position += new Vector3(0, 0.1f, 0);
         }
     }
 
@@ -55,6 +59,10 @@ public class ButtonPlatformMove : MonoBehaviour
         if (collision.gameObject.tag == "Player2")
         {
             openIt = false;
+            if (!up)
+                transform.position += new Vector3(0, 0.1f, 0);
+            else
+                transform.position -= new Vector3(0, 0.1f, 0);
         }
     }
 }

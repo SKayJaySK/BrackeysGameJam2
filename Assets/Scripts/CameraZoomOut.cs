@@ -27,7 +27,7 @@ public class CameraZoomOut : MonoBehaviour
             }
         }
         lastDiff = Mathf.Abs(player1.transform.position.x - player2.transform.position.x);
-
+        
         transform.position = new Vector3((player1.transform.position.x + player2.transform.position.x) / 2, (player1.transform.position.y + player2.transform.position.y) / 2, transform.position.z);
     }
 }

@@ -146,6 +146,7 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding)
         {
             Trail.SetActive(true);
+            StartCoroutine("DashingFalse");
             rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = -1;
             lastDash = Time.time;
@@ -154,6 +155,7 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding)
         {
             Trail.SetActive(true);
+            StartCoroutine("DashingFalse");
             rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
             moveDir = 1;
             lastDash = Time.time;
@@ -238,10 +240,10 @@ public class Player2Controller : MonoBehaviour
             isGrounded = true;
             anim.SetBool("isJumping", false);
 
-            if (moveDir == -2 || moveDir == 1 || moveDir == -1)
+            if (moveDir == -2/* || moveDir == 1 || moveDir == -1*/)
             {
-                moveDir = 0;
                 Trail.SetActive(false);
+                moveDir = 0;
                 collision.gameObject.SetActive(false);
             }
         }
@@ -298,6 +300,7 @@ public class Player2Controller : MonoBehaviour
     IEnumerator DashingFalse()
     {
         yield return new WaitForSeconds(0.2f);
+        Trail.SetActive(false);
         dashingBack = false;
     }
 }
