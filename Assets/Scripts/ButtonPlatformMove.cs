@@ -130,10 +130,11 @@ public class ButtonPlatformMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player2")
+        if (collision.gameObject.tag == "Player2" || collision.gameObject.tag == "Player")
         {
             openIt = true;
             openItPerma = true;
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[3]);
             if (!buttonUp)
                 transform.position -= new Vector3(0, 0.1f, 0);
             else
@@ -143,7 +144,7 @@ public class ButtonPlatformMove : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player2")
+        if (collision.gameObject.tag == "Player2" || collision.gameObject.tag == "Player")
         {
             openIt = false;
             if (!buttonUp)

@@ -1562,10 +1562,10 @@ MonoBehaviour:
   verticalOffset: 1.8
   TextStayingTime: 4
   dialogues:
-  - '"Anyone there?"'
-  - Alone like always. *sigh*
-  - '"Hey !!!"'
-  - '"You are strong for a tiny guy"'
+  - 
+  - '"Adam, where are you?"'
+  - '"Hey?"'
+  - '"You aren''t Adam"'
 --- !u!1 &462520337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1803,75 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &534468066
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9129132490784233273, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1e3160c4c1446445b6b2a688e4ba50e, type: 3}
 --- !u!1 &597442572
 GameObject:
   m_ObjectHideFlags: 0

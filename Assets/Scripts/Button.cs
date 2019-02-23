@@ -35,6 +35,7 @@ public class Button : MonoBehaviour
         if (inside && pressureDoor && sp.sprite != open)
         {
             sp.sprite = open;
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[5]);
             doorCol.enabled = false;
         }
         else if (!inside && pressureDoor && sp.sprite != close)
@@ -55,6 +56,7 @@ public class Button : MonoBehaviour
             else
                 transform.position += new Vector3(0, offset, 0);
             inside = true;
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[3]);
         }
     }
 

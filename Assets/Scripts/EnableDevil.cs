@@ -58,6 +58,11 @@ public class EnableDevil : MonoBehaviour
             enableThis.SetActive(true);
             trigg = 1;
             cz.enabled = false;
+            if (SoundManaging.instance.as1.clip.name != "Chase bgm")
+            {
+                SoundManaging.instance.as1.clip = SoundManaging.instance.sounds[1];
+                SoundManaging.instance.as1.Play();
+            }
         }
     }
 }

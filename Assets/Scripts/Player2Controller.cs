@@ -103,6 +103,7 @@ public class Player2Controller : MonoBehaviour
         {
             anim.SetBool("isJumping", true);
             anim.Play("JumpPlayer2", 0, 0);
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[6]);
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             moveDir = 2;
@@ -146,8 +147,9 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyDown(left) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterL == 1 && !overriding)
         {
             Trail.SetActive(true);
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[4]);
             StartCoroutine("DashingFalse");
-            rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(moveSpeed * -dashMultiplier * Time.deltaTime, 0), ForceMode2D.Impulse);
             moveDir = -1;
             lastDash = Time.time;
         }
@@ -155,8 +157,9 @@ public class Player2Controller : MonoBehaviour
         if (Input.GetKeyDown(right) && Time.time - timer < mostTimeForDash && Time.time - timer > leastTimeForDash && Time.time - lastDash > dashDelay && inputCounterR == 1 && !overriding)
         {
             Trail.SetActive(true);
+            SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[4]);
             StartCoroutine("DashingFalse");
-            rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, rb.velocity.y), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(moveSpeed * dashMultiplier * Time.deltaTime, 0), ForceMode2D.Impulse);
             moveDir = 1;
             lastDash = Time.time;
         }
@@ -190,9 +193,10 @@ public class Player2Controller : MonoBehaviour
                         Trail.SetActive(true);
                         anim.SetBool("isJumping", true);
                         anim.Play("JumpPlayer2", 0, 0);
+                        SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[6]);
                         dashDown = false;
                         rb.velocity = new Vector2(rb.velocity.x, 0);
-                        rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
+                        rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
                         downDashCount++;
                         if (downDashCount < numberOfDownDashOnPlayer1)
                             jumpForce += jumpForce * 0.5f;
@@ -201,14 +205,14 @@ public class Player2Controller : MonoBehaviour
                 case -1:
                     Trail.SetActive(true);
                     rb.velocity = new Vector2(0, rb.velocity.y);
-                    rb.AddForce(new Vector2(moveSpeed / 1.5f, rb.velocity.y), ForceMode2D.Impulse);
+                    rb.AddForce(new Vector2(moveSpeed / 1.5f, 0), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
                 case 1:
                     Trail.SetActive(true);
                     rb.velocity = new Vector2(0, rb.velocity.y);
-                    rb.AddForce(new Vector2(-moveSpeed / 1.5f, rb.velocity.y), ForceMode2D.Impulse);
+                    rb.AddForce(new Vector2(-moveSpeed / 1.5f, 0), ForceMode2D.Impulse);
                     dashingBack = true;
                     rb2.constraints = RigidbodyConstraints2D.FreezeAll;
                     break;
@@ -242,6 +246,7 @@ public class Player2Controller : MonoBehaviour
             if (moveDir == 1 || moveDir == -1)
             {
                 Trail.SetActive(false);
+                SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[7]);
                 moveDir = 0;
                 collision.gameObject.SetActive(false);
                 StartCoroutine("DashingFalse");
@@ -256,6 +261,7 @@ public class Player2Controller : MonoBehaviour
             if (moveDir == -2)
             {
                 Trail.SetActive(false);
+                SoundManaging.instance.as1.PlayOneShot(SoundManaging.instance.sounds[7]);
                 moveDir = 0;
                 collision.gameObject.SetActive(false);
                 StartCoroutine("DashingFalse");

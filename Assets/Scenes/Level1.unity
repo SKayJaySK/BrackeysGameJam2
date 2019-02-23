@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 206360677}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.4, y: 8.11, z: 0}
+  m_LocalPosition: {x: 28.99, y: 7.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1018769610}
@@ -791,7 +791,7 @@ MonoBehaviour:
   verticalOffset: 2
   TextStayingTime: 3
   dialogues:
-  - '"Where am I ?"'
+  - I think I'm in.
   - Isn't there a double jump mechanic ?
   - Ahh! The programmers aren't lazy.
 --- !u!1 &611368389
@@ -3758,3 +3758,72 @@ Transform:
   m_Father: {fileID: 1696600598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &9129132491056064892
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9129132490784233273, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9129132490784233275, guid: d1e3160c4c1446445b6b2a688e4ba50e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d1e3160c4c1446445b6b2a688e4ba50e, type: 3}
