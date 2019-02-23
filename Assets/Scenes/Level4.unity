@@ -246,7 +246,7 @@ Transform:
   - {fileID: 1332053740}
   - {fileID: 521662347}
   m_Father: {fileID: 499760673}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &22358879
 GameObject:
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 169218203}
   - component: {fileID: 169218202}
   m_Layer: 0
-  m_Name: Dialogue 2
+  m_Name: Dialogue 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 499760673}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &169218202
 MonoBehaviour:
@@ -531,8 +531,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowSpecificText: 1
   thisEnablesNext: 0
-  dialogueNumber: 2
-  player: 1
+  dialogueNumber: 1
+  player: 2
   nextDialogue: {fileID: 0}
 --- !u!61 &169218203
 BoxCollider2D:
@@ -854,7 +854,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 451362778}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4a4452adc8fac9348b80ba71af28fa08, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -950,7 +950,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &451362784
 MonoBehaviour:
@@ -976,6 +976,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 1024
+  canMove: 0
 --- !u!114 &451362785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,10 +992,10 @@ MonoBehaviour:
   bubble: {fileID: 1692520331}
   horizontalOffset: 0
   verticalOffset: 1.8
-  TextStayingTime: 4
+  TextStayingTime: 8
   dialogues:
-  - An unfinished area ? Hmm ...\nWonder what went through designer's head ?
-  - Well, this didn't go well.\nNeed to <Escape> somehow.
+  - '''I''ll make sure you don''t stay stuck down there!\nJust don''t fall down when
+    I''m out of the door or \nwe won''t be able to <Escape>."'
 --- !u!1 &462520337
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1469,7 @@ Transform:
   m_Children:
   - {fileID: 1220050759}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &499760671
 GameObject:
@@ -1547,15 +1548,13 @@ Transform:
   m_LocalPosition: {x: 0, y: -3.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1063334349}
-  - {fileID: 1378546236}
   - {fileID: 169218201}
   - {fileID: 937798871}
   - {fileID: 18543301}
   - {fileID: 1279273228}
   - {fileID: 1741054157}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &499760674
 MonoBehaviour:
@@ -2220,7 +2219,7 @@ Transform:
   - {fileID: 478318988}
   - {fileID: 1887100482}
   m_Father: {fileID: 499760673}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &968019726
 GameObject:
@@ -2340,6 +2339,7 @@ MonoBehaviour:
   open: {fileID: 21300000, guid: 96c91ff56ffbcc0469c6911979761bed, type: 3}
   close: {fileID: 21300000, guid: 77adbc2e1b487604b9cb557ce4c9ad96, type: 3}
   door: {fileID: 1291761757}
+  up: 0
   pressureDoor: 1
 --- !u!61 &1039980998
 BoxCollider2D:
@@ -2528,81 +2528,6 @@ MonoBehaviour:
   player2: {fileID: 484390957}
   limit: 3
   cameraZoomSpeed: 1
---- !u!1 &1063334347
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1063334349}
-  - component: {fileID: 1063334348}
-  - component: {fileID: 1063334350}
-  m_Layer: 0
-  m_Name: Dialogue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &1063334348
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063334347}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 2.483655, y: 1.3869848}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 16.4181, y: 8.547777}
-  m_EdgeRadius: 0
---- !u!4 &1063334349
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063334347}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.32, y: 12.12, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 499760673}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1063334350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063334347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b30cbe1f940db4744924ca0e138c2d46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowSpecificText: 1
-  thisEnablesNext: 0
-  dialogueNumber: 1
-  player: 1
-  nextDialogue: {fileID: 0}
 --- !u!1 &1112670669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2877,7 +2802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220050758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 484390963}
@@ -3082,7 +3007,7 @@ Transform:
   - {fileID: 1236492850}
   - {fileID: 1953393750}
   m_Father: {fileID: 499760673}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1290231877
 GameObject:
@@ -3454,78 +3379,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.28, y: 5.01}
   m_EdgeRadius: 0
---- !u!1 &1378546235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1378546236}
-  - component: {fileID: 1378546237}
-  - component: {fileID: 1378546238}
-  m_Layer: 0
-  m_Name: DisableDialogue
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1378546236
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378546235}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.73, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 499760673}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1378546237
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378546235}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 13.026525, y: -4.092634}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.2977085, y: 7.188862}
-  m_EdgeRadius: 0
---- !u!114 &1378546238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378546235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe640bcc4a8eb91438ea2e8c50ceb209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: 2
-  disableThis: {fileID: 169218200}
 --- !u!1 &1494021175
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,7 +3606,7 @@ Transform:
   - {fileID: 1291761760}
   - {fileID: 1039981000}
   m_Father: {fileID: 499760673}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749269350
 GameObject:

@@ -6,6 +6,10 @@ public class SceneManagement : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        {
+            if (SceneManager.GetActiveScene().name != "end")
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            else Application.Quit();
+        }
     }
 }

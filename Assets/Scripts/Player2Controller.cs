@@ -237,14 +237,28 @@ public class Player2Controller : MonoBehaviour
 
         if (collision.gameObject.tag == "Break")
         {
-            isGrounded = true;
             anim.SetBool("isJumping", false);
 
-            if (moveDir == -2/* || moveDir == 1 || moveDir == -1*/)
+            if (moveDir == 1 || moveDir == -1)
             {
                 Trail.SetActive(false);
                 moveDir = 0;
                 collision.gameObject.SetActive(false);
+                StartCoroutine("DashingFalse");
+            }
+        }
+
+        if (collision.gameObject.tag == "BreakF")
+        {
+            isGrounded = true;
+            anim.SetBool("isJumping", false);
+
+            if (moveDir == -2)
+            {
+                Trail.SetActive(false);
+                moveDir = 0;
+                collision.gameObject.SetActive(false);
+                StartCoroutine("DashingFalse");
             }
         }
 
@@ -270,7 +284,7 @@ public class Player2Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Break")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "BreakF")
             isGrounded = true;
 
         if (collision.gameObject.tag == "Player")

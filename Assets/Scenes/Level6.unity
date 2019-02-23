@@ -179,11 +179,11 @@ Transform:
   - {fileID: 1112670670}
   - {fileID: 1869916171}
   - {fileID: 214121160}
-  - {fileID: 1197918440}
-  - {fileID: 1992873135}
   - {fileID: 1506054365}
   - {fileID: 712378624}
   - {fileID: 722475834}
+  - {fileID: 1197918440}
+  - {fileID: 1992873135}
   m_Father: {fileID: 2063028735}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5596,7 +5596,6 @@ GameObject:
   - component: {fileID: 451362779}
   - component: {fileID: 451362782}
   - component: {fileID: 451362784}
-  - component: {fileID: 451362785}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -5756,24 +5755,6 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &451362785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 451362778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 738823df11cfaee408dc17bf91ed885e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bubble: {fileID: 2317281}
-  horizontalOffset: 0
-  verticalOffset: 1.8
-  TextStayingTime: 4
-  dialogues:
-  - I wonder what's this empty area for ?
 --- !u!1 &462520337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5906,7 +5887,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 55
+  m_SortingOrder: 60
   m_Sprite: {fileID: 21300000, guid: 85f12a6a3e7b03d4794ffc066322fc97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6433,7 +6414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1334ffd4bb5a53145b63e9c3bfdbaf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: level1
+  nextScene: level7
   player1should: 0
   player2should: 0
   bothShouldReach: 1
@@ -6644,7 +6625,7 @@ Transform:
   m_LocalScale: {x: 1.4061145, y: 1.00701, z: 1}
   m_Children: []
   m_Father: {fileID: 18543301}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &712378625
 SpriteRenderer:
@@ -6723,7 +6704,7 @@ Transform:
   m_LocalScale: {x: 1.4061145, y: 1.00701, z: 1}
   m_Children: []
   m_Father: {fileID: 18543301}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &722475835
 SpriteRenderer:
@@ -6883,7 +6864,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 55
+  m_SortingOrder: 60
   m_Sprite: {fileID: 21300000, guid: 85f12a6a3e7b03d4794ffc066322fc97, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -7028,7 +7009,7 @@ GameObject:
   - component: {fileID: 835062470}
   m_Layer: 0
   m_Name: Breakable floor small R
-  m_TagString: Break
+  m_TagString: BreakF
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7197,7 +7178,6 @@ GameObject:
   - component: {fileID: 1049728022}
   - component: {fileID: 1049728021}
   - component: {fileID: 1049728020}
-  - component: {fileID: 1049728023}
   - component: {fileID: 1049728024}
   m_Layer: 0
   m_Name: Main Camera
@@ -7270,21 +7250,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1049728023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1049728019}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f8977a9bbf0e1c47af94e8e8845525d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toFollow: {fileID: 451362778}
-  horizontalOffset: 11.3
-  verticalOffset: 1.8
 --- !u!114 &1049728024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7574,7 +7539,7 @@ GameObject:
   - component: {fileID: 1124741557}
   m_Layer: 0
   m_Name: Breakable floor small L
-  m_TagString: Break
+  m_TagString: BreakF
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8069,7 +8034,7 @@ Transform:
   - {fileID: 122807572}
   - {fileID: 101553501}
   m_Father: {fileID: 18543301}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1197918441
 BoxCollider2D:
@@ -8122,7 +8087,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238907309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2142648220}
@@ -8303,7 +8268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableThis: {fileID: 2144633220}
-  offset: 30
+  offset: 50
 --- !u!1 &1264992128
 GameObject:
   m_ObjectHideFlags: 0
@@ -8872,7 +8837,7 @@ Transform:
   m_LocalScale: {x: 1.4061145, y: 1.00701, z: 1}
   m_Children: []
   m_Father: {fileID: 18543301}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1506054366
 SpriteRenderer:
@@ -10186,7 +10151,7 @@ Transform:
   - {fileID: 22358880}
   - {fileID: 1148736966}
   m_Father: {fileID: 18543301}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1992873136
 BoxCollider2D:
@@ -10912,7 +10877,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 60
+  m_SortingOrder: 70
   m_Sprite: {fileID: 21300000, guid: f2d9aea020f3c6a4ebd6e06e29cfddcf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
