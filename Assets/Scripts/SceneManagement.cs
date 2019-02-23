@@ -7,7 +7,7 @@ public class SceneManagement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (SceneManager.GetActiveScene().name != "end")
+            if (SceneManager.GetActiveScene().name != "credits")
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             else Application.Quit();
         }

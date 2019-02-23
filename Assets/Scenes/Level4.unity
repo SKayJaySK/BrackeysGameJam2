@@ -241,10 +241,10 @@ Transform:
   - {fileID: 1760402116}
   - {fileID: 1112670670}
   - {fileID: 1869916171}
-  - {fileID: 1197918440}
-  - {fileID: 1992873135}
   - {fileID: 1332053740}
   - {fileID: 521662347}
+  - {fileID: 1197918440}
+  - {fileID: 1992873135}
   m_Father: {fileID: 499760673}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -991,8 +991,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubble: {fileID: 1692520331}
   horizontalOffset: 0
-  verticalOffset: 1.8
-  TextStayingTime: 8
+  verticalOffset: 2.5
+  TextStayingTime: 10
   dialogues:
   - '''I''ll make sure you don''t stay stuck down there!\nJust don''t fall down when
     I''m out of the door or \nwe won''t be able to <Escape>."'
@@ -1597,7 +1597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.106, z: 1}
   m_Children: []
   m_Father: {fileID: 18543301}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &521662348
 SpriteRenderer:
@@ -1691,7 +1691,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.2436066}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1702,7 +1702,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.11693573, y: 4.855526}
+  m_Size: {x: 0.11693573, y: 7.342739}
   m_EdgeRadius: 0
 --- !u!1 &584320569
 GameObject:
@@ -1960,7 +1960,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.4096355, y: 1.8329592}
+  m_Offset: {x: 4.4096355, y: 3.0802982}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1971,7 +1971,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.646317, y: 1.1896076}
+  m_Size: {x: 8.646317, y: 3.6842856}
   m_EdgeRadius: 0
 --- !u!61 &687793188
 BoxCollider2D:
@@ -1986,7 +1986,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 11.486555, y: 4.20482}
+  m_Offset: {x: 11.486555, y: 6.900434}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1997,7 +1997,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.807125, y: 5.9333305}
+  m_Size: {x: 5.807125, y: 5.4840517}
   m_EdgeRadius: 0
 --- !u!61 &687793189
 BoxCollider2D:
@@ -2749,7 +2749,7 @@ Transform:
   - {fileID: 122807572}
   - {fileID: 101553501}
   m_Father: {fileID: 18543301}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1197918441
 BoxCollider2D:
@@ -2764,7 +2764,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 49.97693, y: 12.212948}
+  m_Offset: {x: 49.97693, y: 12.541115}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2775,7 +2775,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 50.125443, y: 28.044624}
+  m_Size: {x: 50.125443, y: 27.38829}
   m_EdgeRadius: 0
 --- !u!1 &1220050758
 GameObject:
@@ -3351,7 +3351,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 18543301}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1332053741
 BoxCollider2D:
@@ -3414,7 +3414,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -154.89, y: 53.7}
-  m_SizeDelta: {x: 309.78, y: 164.93}
+  m_SizeDelta: {x: 422.5, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1494021177
 MonoBehaviour:
@@ -3438,7 +3438,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 15
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3599,7 +3599,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741054156}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 650932016}
@@ -4221,7 +4221,7 @@ Transform:
   - {fileID: 22358880}
   - {fileID: 1148736966}
   m_Father: {fileID: 18543301}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1992873136
 BoxCollider2D:

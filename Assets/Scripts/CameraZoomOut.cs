@@ -27,7 +27,7 @@ public class CameraZoomOut : MonoBehaviour
                 Camera.main.orthographicSize -= cameraZoomSpeed * Time.deltaTime;
                 transform.position -= new Vector3(0, cameraZoomSpeed * Time.deltaTime, 0);
             }
-            else if (lastDiff < Mathf.Abs(player1.transform.position.x - player2.transform.position.x) || Camera.main.orthographicSize <= (Mathf.Abs(player1.transform.position.x - player2.transform.position.x) + player1.transform.localScale.y * 1.5f) / 2)
+            else if (lastDiff < Mathf.Abs(player1.transform.position.x - player2.transform.position.x)/* || Camera.main.orthographicSize <= (Mathf.Abs(player1.transform.position.x - player2.transform.position.x) + player1.transform.localScale.y * 1.5f) / 2*/)
             {
                 Camera.main.orthographicSize += cameraZoomSpeed * Time.deltaTime;
                 transform.position += new Vector3(0, cameraZoomSpeed * Time.deltaTime, 0);

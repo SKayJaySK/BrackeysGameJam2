@@ -33,7 +33,12 @@ public class Player1Controller : MonoBehaviour
     {
         RayCasting();
         if (canMove)
+        {
             Move();
+            anim.SetBool("Dead", false);
+        }
+        else
+            anim.SetBool("Dead", true);
     }
 
     void RayCasting()

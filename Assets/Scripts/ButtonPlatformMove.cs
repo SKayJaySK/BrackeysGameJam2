@@ -5,40 +5,126 @@ using UnityEngine;
 public class ButtonPlatformMove : MonoBehaviour
 {
     public float moveTill;
-    float moveTill2;
-    public bool moveRight, up;
+    float moveTill2, myX;
+    public float moveSpeed = 3f;
+    public bool moveRight, buttonUp, moveDown, dontStop;
     public GameObject moveThisObject;
 
-    bool openIt;
+    bool openIt, openItPerma;
 
     private void Start()
     {
         openIt = false;
-        moveTill2 = moveThisObject.transform.position.x;
+        openItPerma = false;
+        if (!moveDown)
+            moveTill2 = moveThisObject.transform.position.x;
+        else
+            moveTill2 = moveThisObject.transform.position.y;
     }
 
     private void Update()
     {
-        if(moveRight && openIt)
+        if (!dontStop)
         {
-            if (moveThisObject.transform.position.x < moveTill)
-                moveThisObject.transform.position += new Vector3(Time.deltaTime, 0, 0);
-        }
-        else if(!moveRight && openIt)
-        {
-            if (moveThisObject.transform.position.x > moveTill)
-                moveThisObject.transform.position -= new Vector3(Time.deltaTime, 0, 0);
-        }
+            if (!moveDown)
+            {
+                if (moveRight && openIt)
+                {
+                    if (moveThisObject.transform.position.x < moveTill2 - moveTill)
+                        moveThisObject.transform.position += new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+                else if (!moveRight && openIt)
+                {
+                    if (moveThisObject.transform.position.x > moveTill2 - moveTill)
+                        moveThisObject.transform.position -= new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
 
-        if (moveRight && !openIt)
-        {
-            if (moveThisObject.transform.position.x > moveTill2)
-                moveThisObject.transform.position -= new Vector3(Time.deltaTime, 0, 0);
+                if (moveRight && !openIt)
+                {
+                    if (moveThisObject.transform.position.x > moveTill2)
+                        moveThisObject.transform.position -= new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+                else if (!moveRight && !openIt)
+                {
+                    if (moveThisObject.transform.position.x < moveTill2)
+                        moveThisObject.transform.position += new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+            }
+            else
+            {
+                if (moveRight && openIt)
+                {
+                    if (moveThisObject.transform.position.y < moveTill2 - moveTill)
+                        moveThisObject.transform.position += new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+                else if (!moveRight && openIt)
+                {
+                    if (moveThisObject.transform.position.y > moveTill2 - moveTill)
+                        moveThisObject.transform.position -= new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+
+                if (moveRight && !openIt)
+                {
+                    if (moveThisObject.transform.position.y > moveTill2)
+                        moveThisObject.transform.position -= new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+                else if (!moveRight && !openIt)
+                {
+                    if (moveThisObject.transform.position.y < moveTill2)
+                        moveThisObject.transform.position += new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+            }
         }
-        else if (!moveRight && !openIt)
+        else
         {
-            if (moveThisObject.transform.position.x < moveTill2)
-                moveThisObject.transform.position += new Vector3(Time.deltaTime, 0, 0);
+            if (!moveDown)
+            {
+                if (moveRight && openItPerma)
+                {
+                    if (moveThisObject.transform.position.x < moveTill2 - moveTill)
+                        moveThisObject.transform.position += new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+                else if (!moveRight && openItPerma)
+                {
+                    if (moveThisObject.transform.position.x > moveTill2 - moveTill)
+                        moveThisObject.transform.position -= new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+
+                if (moveRight && !openItPerma)
+                {
+                    if (moveThisObject.transform.position.x > moveTill2)
+                        moveThisObject.transform.position -= new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+                else if (!moveRight && !openItPerma)
+                {
+                    if (moveThisObject.transform.position.x < moveTill2)
+                        moveThisObject.transform.position += new Vector3(Time.deltaTime * moveSpeed, 0, 0);
+                }
+            }
+            else
+            {
+                if (moveRight && openItPerma)
+                {
+                    if (moveThisObject.transform.position.y < moveTill2 - moveTill)
+                        moveThisObject.transform.position += new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+                else if (!moveRight && openItPerma)
+                {
+                    if (moveThisObject.transform.position.y > moveTill2 - moveTill)
+                        moveThisObject.transform.position -= new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+
+                if (moveRight && !openItPerma)
+                {
+                    if (moveThisObject.transform.position.y > moveTill2)
+                        moveThisObject.transform.position -= new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+                else if (!moveRight && !openItPerma)
+                {
+                    if (moveThisObject.transform.position.y < moveTill2)
+                        moveThisObject.transform.position += new Vector3(0, Time.deltaTime * moveSpeed, 0);
+                }
+            }
         }
     }
 
@@ -47,7 +133,8 @@ public class ButtonPlatformMove : MonoBehaviour
         if (collision.gameObject.tag == "Player2")
         {
             openIt = true;
-            if (!up)
+            openItPerma = true;
+            if (!buttonUp)
                 transform.position -= new Vector3(0, 0.1f, 0);
             else
                 transform.position += new Vector3(0, 0.1f, 0);
@@ -59,7 +146,7 @@ public class ButtonPlatformMove : MonoBehaviour
         if (collision.gameObject.tag == "Player2")
         {
             openIt = false;
-            if (!up)
+            if (!buttonUp)
                 transform.position += new Vector3(0, 0.1f, 0);
             else
                 transform.position -= new Vector3(0, 0.1f, 0);
